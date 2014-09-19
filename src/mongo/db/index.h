@@ -275,11 +275,16 @@ namespace mongo {
         // In the future:
         // - FTS indexes?
 
+
 /*CONFLICT        static shared_ptr<IndexDetailsBase> make(const BSONObj &info,
                                                  const bool may_create,
                                                  const bool use_memcmp_magic);*/
 
-        static shared_ptr<IndexInterface> make(const BSONObj &info, const bool may_create = true);
+/*CONFLICT        static shared_ptr<IndexInterface> make(const BSONObj &info, const bool may_create = true);*/
+
+        static shared_ptr<IndexInterface> make(const BSONObj &info,
+                                               const bool may_create,
+                                               const bool use_memcmp_magic);
 
 
         IndexInterface(const BSONObj& info);
@@ -389,7 +394,7 @@ namespace mongo {
         //CONFLICT       bool open(const bool may_create, const bool use_memcmp_magic);
 
         // Only IndexInterface::make() calls the constructor / open.
-        bool open(const bool may_create);
+        bool open(const bool may_create, const bool use_memcmp_magic);
 
 
         friend class CollectionBase;

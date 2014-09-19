@@ -138,9 +138,13 @@ namespace mongo {
     // relevant steps of Collection::dropIndex and CollectionBase::dropIndexDetails
     void cleanupOrphanedIndex(const BSONObj& info) {
 
+
 //CONFLICT        shared_ptr<IndexDetailsBase> idx(IndexDetailsBase::make(info, false, false));
 
-        shared_ptr<IndexInterface> idx(IndexInterface::make(info, false));
+//CONFLICT        shared_ptr<IndexInterface> idx(IndexInterface::make(info, false));
+
+
+        shared_ptr<IndexInterface> idx(IndexInterface::make(info, false, false));
 
         StringData collns = info["ns"].Stringdata();
         // This code was taken from 1.4.1's implementation of Collection::dropIndex,
@@ -505,7 +509,10 @@ namespace mongo {
         for (std::vector<BSONElement>::iterator it = index_array.begin(); it != index_array.end(); it++) {
             const BSONObj &info = it->Obj();
 
+<<<<<<< HEAD
 /*CONFLICT
+=======
+>>>>>>> MX-1290 Only set the memcmp magic for primary key indexes, new or
             // We do not intend to create the index here.
             const bool may_create = false;
             const bool isPK = info["key"].Obj() == _pk;
@@ -513,10 +520,14 @@ namespace mongo {
                 // Primary key should always be the first entry in the indexes array.
                 verify(it == index_array.begin());
             }
+<<<<<<< HEAD
             shared_ptr<IndexDetailsBase> idx(IndexDetailsBase::make(info, may_create, isPK));*/
 
             shared_ptr<IndexInterface> idx(IndexInterface::make(info, false));
 
+=======
+            shared_ptr<IndexInterface> idx(IndexInterface::make(info, may_create, isPK));
+>>>>>>> MX-1290 Only set the memcmp magic for primary key indexes, new or
             if (!idx && cc().upgradingSystemUsers() && isSystemUsersCollection(_ns) &&
                 oldSystemUsersKeyPattern == info["key"].Obj()) {
                 // This was already dropped, but because of #673 we held on to the info.

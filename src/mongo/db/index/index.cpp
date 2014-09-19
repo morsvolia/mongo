@@ -56,12 +56,18 @@ namespace mongo {
     }
 
 
+
              /*CONFLICT    shared_ptr<IndexDetailsBase> IndexDetailsBase::make(const BSONObj &info,
                                                     const bool may_create,
                                                     const bool use_memcmp_magic) {
                                                     shared_ptr<IndexDetailsBase> idx;*/
 
-    shared_ptr<IndexInterface> IndexInterface::make(const BSONObj &info, const bool may_create) {
+        /*CONFLICT    shared_ptr<IndexInterface> IndexInterface::make(const BSONObj &info, const bool may_create) {*/
+
+    shared_ptr<IndexInterface> IndexInterface::make(const BSONObj &info,
+                                                    const bool may_create,
+                                                    const bool use_memcmp_magic) {
+
         shared_ptr<IndexInterface> idx;
 
         const string special = findSpecialIndexName(info["key"].Obj());
@@ -131,11 +137,15 @@ namespace mongo {
     }
 
     // Open the dictionary. Creates it if necessary.
+<<<<<<< HEAD
 
     //CONFLICT    bool IndexDetailsBase::open(const bool may_create, const bool use_memcmp_magic) {
 
     bool IndexInterface::open(const bool may_create) {
 
+=======
+    bool IndexInterface::open(const bool may_create, const bool use_memcmp_magic) {
+>>>>>>> MX-1290 Only set the memcmp magic for primary key indexes, new or
         const string dname = indexNamespace();
 
         TOKULOG(1) << "Opening IndexDetails " << dname << endl;
