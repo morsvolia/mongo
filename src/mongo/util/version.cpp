@@ -49,8 +49,7 @@ namespace mongo {
      */
     const char mongodbVersionString[] = "2.4.10";
 
-    
-    const char tokumxVersionString[] = "2.0.1-pre-";
+    const char tokumxVersionString[] = "2.0.0-pre-";
 
 
     std::string fullVersionString() {
