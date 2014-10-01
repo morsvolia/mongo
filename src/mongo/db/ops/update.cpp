@@ -435,7 +435,7 @@ namespace mongo {
                 continue;
             }
             bool eligibleForFastUpdate = false;
-            bool canBeFast = canRunFastUpdate(cl, upsert, mods.get(), isOperatorUpdate, &eligibleForFastUpdate);
+            bool canBeFast = canRunFastUpdate(cl, false, mods.get(), isOperatorUpdate, &eligibleForFastUpdate);
 
             if (!isOperatorUpdate) {
                 verify(!multi); // should be uasserted above
@@ -480,7 +480,7 @@ namespace mongo {
                     currPK,
                     BSONObj(), // no query needed
                     updateobj,
-                    upsert,
+                    false,
                     fromMigrate,
                     mods.get(),
                     isOperatorUpdate,
