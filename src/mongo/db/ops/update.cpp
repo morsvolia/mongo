@@ -307,7 +307,7 @@ namespace mongo {
             return false;
         }
         verify(!forceLogFullUpdate(cl, mods));
-        if (upsert && cl->nIndexesBeingBuilt() > 0) {
+        if (upsert && cl->nIndexesBeingBuilt() > 1) {
             return false;
         }
         *eligible = true;
