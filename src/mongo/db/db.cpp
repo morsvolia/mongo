@@ -18,7 +18,7 @@
 */
 
 #include "mongo/pch.h"
-
+#include <cstdlib>
 #include <boost/thread/thread.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <fstream>
@@ -805,6 +805,9 @@ void show_help_text(po::options_description options) {
 static int mongoDbMain(int argc, char* argv[], char** envp);
 
 int main(int argc, char* argv[], char** envp) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
     int exitCode = mongoDbMain(argc, argv, envp);
     ::_exit(exitCode);
 }
@@ -870,7 +873,7 @@ static void buildOptionsDescriptions(po::options_description *pVisible,
     ("noprealloc", "disable data file preallocation - will often hurt performance")
     ("noscripting", "disable scripting engine")
     ("notablescan", "do not allow table scans")
-    ("nssize", po::value<int>()->default_value(16), ".ns file size (in MB) for new databases")
+    //("nssize", po::value<int>()->default_value(16), ".ns file size (in MB) for new databases")
     ("profile",po::value<int>(), "0=off 1=slow, 2=all")
     ("quota", "limits each database to a certain number of files (8 default)")
     ("quotaFiles", po::value<int>(), "number of files allowed per db, requires --quota")
