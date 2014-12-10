@@ -109,7 +109,7 @@ namespace mongo {
         char name[128];
         sprintf(name, "/proc/%d/file", _pid);
 
-        char path[128];
+        //char path[128];
         shared_ptr<char> real(realpath(name, NULL), free);
         if (!real.get()) {
             stringstream ss;
