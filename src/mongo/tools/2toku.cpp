@@ -17,7 +17,7 @@
 */
 
 #include "mongo/pch.h"
-
+#include <cstdlib>
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -588,6 +588,10 @@ namespace proc_mgmt {
 }
 
 int main( int argc , char** argv, char **envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     OplogTool t;
     t.running = true;

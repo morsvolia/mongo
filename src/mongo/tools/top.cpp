@@ -26,7 +26,7 @@
 #include <fstream>
 #include <iostream>
 #include <boost/program_options.hpp>
-
+#include <cstdlib>
 namespace po = boost::program_options;
 
 namespace mongo {
@@ -192,6 +192,10 @@ namespace mongo {
 }
 
 int main( int argc , char ** argv, char ** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     mongo::TopTool top;
     return top.main( argc , argv );

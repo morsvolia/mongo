@@ -18,7 +18,7 @@
 */
 
 #include "pch.h"
-
+#include <cstdlib>
 #include <boost/thread/thread.hpp>
 
 #include "mongo/base/initializer.h"
@@ -586,6 +586,10 @@ int main(int argc, char* argv[], char** envp) {
     if (argc < 1)
         ::_exit(EXIT_FAILURE);
 
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongosCommand = argv[0];
 
     processCommandLineOptions(std::vector<std::string>(argv, argv + argc));

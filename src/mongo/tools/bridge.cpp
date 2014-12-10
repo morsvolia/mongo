@@ -17,7 +17,7 @@
  */
 
 #include "pch.h"
-
+#include <cstdlib>
 #include <boost/thread.hpp>
 
 #include "mongo/base/initializer.h"
@@ -151,6 +151,10 @@ void check( bool b ) {
 }
 
 int main( int argc, char **argv, char** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
 
     static StaticObserver staticObserver;

@@ -22,7 +22,7 @@
 #include "mongo/client/dbclientcursor.h"
 #include "../util/text.h"
 #include "tool.h"
-
+#include <cstdlib>
 #include <boost/program_options.hpp>
 
 #include <fcntl.h>
@@ -143,6 +143,10 @@ public:
 };
 
 int main( int argc , char ** argv, char **envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     BSONDump dump;
     return dump.main( argc , argv );

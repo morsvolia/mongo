@@ -55,7 +55,7 @@
 #include <iostream>
 #include <map>
 #include <string>
-
+#include <cstdlib>
 #include <boost/shared_ptr.hpp>
 
 using namespace std;
@@ -445,6 +445,10 @@ void usage() {
 }
 
 int main(int argc, char **argv, char** envp) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
 
     stringstream nullStream;
