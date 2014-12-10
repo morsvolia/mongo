@@ -312,7 +312,7 @@ namespace mongo {
         static const char *f_typeString(const struct statfs &st) {
 #if defined(FSTYPENAMES)
             return fstypenames[st.f_type];
-#elif defined(_DARWIN_FEATURE_64_BIT_INODE)
+#elif defined(_DARWIN_FEATURE_64_BIT_INODE) || defined(__FreeBSD__)
             return st.f_fstypename;
 #else /* !defined(FSTYPENAMES) && !defined(_DARWIN_FEATURE_64_BIT_INODE) */
 
