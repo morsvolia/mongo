@@ -4,9 +4,9 @@ add_library(plugins STATIC
   loader
   )
 add_dependencies(plugins generate_error_codes generate_action_types install_tdb_h)
-target_link_libraries(plugins LINK_PUBLIC
-  dl
-  )
+if(NOT CMAKE_SYSTEM_NAME STREQUAL FreeBSD)
+  target_link_libraries(plugins LINK_PUBLIC dl )
+endif()
 
 file(GLOB dentries RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" *)
 foreach (dentry ${dentries})
