@@ -24,7 +24,7 @@
 #include "mongo/util/text.h"
 #include "mongo/base/initializer.h"
 #include "mongo/client/remote_loader.h"
-
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <boost/program_options.hpp>
@@ -533,6 +533,10 @@ public:
 };
 
 int main( int argc , char ** argv, char** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     Import import;
     return import.main( argc , argv );

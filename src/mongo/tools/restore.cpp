@@ -27,7 +27,7 @@
 #include <fcntl.h>
 #include <fstream>
 #include <set>
-
+#include <cstdlib>
 #include "mongo/base/initializer.h"
 #include "mongo/db/namespacestring.h"
 #include "mongo/tools/tool.h"
@@ -517,6 +517,10 @@ private:
 };
 
 int main( int argc , char ** argv, char ** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     Restore restore;
     return restore.main( argc , argv );

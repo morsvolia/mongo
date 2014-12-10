@@ -22,7 +22,7 @@
 #include "mongo/client/dbclientcursor.h"
 
 #include "tool.h"
-
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 
@@ -246,6 +246,10 @@ public:
 };
 
 int main( int argc , char ** argv, char** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     Export e;
     return e.main( argc , argv );

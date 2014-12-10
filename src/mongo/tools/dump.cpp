@@ -22,7 +22,7 @@
 #include <fcntl.h>
 #include <map>
 #include <fstream>
-
+#include <cstdlib>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/convenience.hpp>
 
@@ -391,6 +391,10 @@ public:
 };
 
 int main( int argc , char ** argv, char ** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     Dump d;
     return d.main( argc , argv );

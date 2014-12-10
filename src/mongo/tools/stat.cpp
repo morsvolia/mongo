@@ -23,7 +23,7 @@
 #include <boost/thread/thread.hpp>
 #include <fstream>
 #include <iostream>
-
+#include <cstdlib>
 #include "mongo/base/initializer.h"
 #include "mongo/client/dbclientcursor.h"
 #include "mongo/db/jsobjmanipulator.h"
@@ -573,6 +573,10 @@ namespace mongo {
 }
 
 int main( int argc , char ** argv, char ** envp ) {
+    unsetenv("LANG");
+    unsetenv("LANGUAGE");
+    setenv("LC_ALL","C",1);
+    
     mongo::runGlobalInitializersOrDie(argc, argv, envp);
     mongo::Stat stat;
     return stat.main( argc , argv );
