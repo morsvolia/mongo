@@ -96,8 +96,8 @@ set_cxxflags_if_supported(
   -Wno-unused-local-typedefs
   )
 if (CMAKE_CXX_COMPILER_ID STREQUAL GNU)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-builtin-memcmp")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-builtin-memcmp")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-builtin-memcmp -fno-omit-frame-pointer")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-builtin-memcmp -fno-omit-frame-pointer")
 endif ()
 set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS
   _FILE_OFFSET_BITS=64
