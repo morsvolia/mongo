@@ -511,7 +511,7 @@ namespace mongo {
         for (std::vector<BSONElement>::iterator it = index_array.begin(); it != index_array.end(); it++) {
             const BSONObj &info = it->Obj();
 
-<<<<<<< HEAD
+
 /*CONFLICT
 =======
 >>>>>>> MX-1290 Only set the memcmp magic for primary key indexes, new or
@@ -525,11 +525,13 @@ namespace mongo {
 <<<<<<< HEAD
             shared_ptr<IndexDetailsBase> idx(IndexDetailsBase::make(info, may_create, isPK));*/
 
-            shared_ptr<IndexInterface> idx(IndexInterface::make(info, false));
+//CONFLICT            shared_ptr<IndexInterface> idx(IndexInterface::make(info, false));
 
-=======
+            const bool may_create = false;
+            const bool isPK = info["key"].Obj() == _pk;
+
             shared_ptr<IndexInterface> idx(IndexInterface::make(info, may_create, isPK));
->>>>>>> MX-1290 Only set the memcmp magic for primary key indexes, new or
+
             if (!idx && cc().upgradingSystemUsers() && isSystemUsersCollection(_ns) &&
                 oldSystemUsersKeyPattern == info["key"].Obj()) {
                 // This was already dropped, but because of #673 we held on to the info.
