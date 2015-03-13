@@ -72,6 +72,7 @@ typedef unsigned long ulong;
 
 #elif defined OS_FREEBSD || defined __FreeBSD__
 
+
 // _BIG_ENDIAN
 #include <machine/endian.h>
 
@@ -101,6 +102,7 @@ typedef uint16_t u_int16_t;
 #define __BIG_ENDIAN BIG_ENDIAN
 
 #endif
+
 
 #if defined __sunos__ || defined __FreeBSD__
 #ifdef _LITTLE_ENDIAN

@@ -98,12 +98,6 @@ namespace mongo {
         // way that secondary keys do.
         const bool use_memcmp_magic = !_isSecondaryIndex && keyPattern == BSON("_id" << 1);
 
-//CONFLICT        _idx = IndexDetailsBase::make(_info, may_create, use_memcmp_magic);
-
-        // Store the index in the _indexes array so that others know an
-        // index with this name / key pattern exists and is being built.
-//CONFLICT        _idx = IndexInterface::make(_info);
-
 
         _idx = IndexInterface::make(_info, may_create, use_memcmp_magic);
 

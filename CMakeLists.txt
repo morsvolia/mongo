@@ -386,6 +386,7 @@ else ()
     git_version(TOKUBACKUP "${CMAKE_SOURCE_DIR}/src/third_party/backup/")
     git_version(TOKUMX_BACKUP_PLUGIN "${CMAKE_SOURCE_DIR}/src/mongo/plugins/tokumx-backup-plugin")
     git_version(TOKUMX_PITR_PLUGIN "${CMAKE_SOURCE_DIR}/src/mongo/plugins/tokumx-pitr-plugin")
+    git_version(TOKUMX_AUDIT_ENTERPRISE "${CMAKE_SOURCE_DIR}/src/mongo/db/audit")
   endif ()
 endif ()
 
@@ -487,6 +488,11 @@ set(CPACK_COMPONENTS_ALL
   tokubackup_libs_shared
   tokumx_debuginfo
   )
+
+if (TOKUMX_ENTERPRISE)
+  set(CPACK_COMPONENT_TOKUMX_AUDIT_LIBS_SHARED_GROUP main)
+  list(APPEND CPACK_COMPONENTS_ALL tokumx_audit_libs_shared)
+endif()
 
 if (TOKUMX_ENTERPRISE_CREATE_EXPORTS)
   install(EXPORT tokumx_enterprise_exports DESTINATION exports/ COMPONENT tokumx_enterprise_exports)

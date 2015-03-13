@@ -56,18 +56,9 @@ namespace mongo {
     }
 
 
-
-             /*CONFLICT    shared_ptr<IndexDetailsBase> IndexDetailsBase::make(const BSONObj &info,
-                                                    const bool may_create,
-                                                    const bool use_memcmp_magic) {
-                                                    shared_ptr<IndexDetailsBase> idx;*/
-
-        /*CONFLICT    shared_ptr<IndexInterface> IndexInterface::make(const BSONObj &info, const bool may_create) {*/
-
     shared_ptr<IndexInterface> IndexInterface::make(const BSONObj &info,
                                                     const bool may_create,
                                                     const bool use_memcmp_magic) {
-
         shared_ptr<IndexInterface> idx;
 
         const string special = findSpecialIndexName(info["key"].Obj());
@@ -121,6 +112,7 @@ namespace mongo {
             }*/
 
 
+
         // Create a standard key generator for this index
         vector<const char *> fieldNames;
         for (BSONObjIterator it(_keyPattern); it.more(); ) {
@@ -137,12 +129,6 @@ namespace mongo {
     }
 
     // Open the dictionary. Creates it if necessary.
-
-
-    //CONFLICT    bool IndexDetailsBase::open(const bool may_create, const bool use_memcmp_magic) {
-
-//CONFLICT    bool IndexInterface::open(const bool may_create) {
-
 
     bool IndexInterface::open(const bool may_create, const bool use_memcmp_magic) {
 

@@ -19,7 +19,7 @@ License: AGPLv3 and zlib and ASL 2.0 and GPLv2
 Vendor: Tokutek, Inc.
 URL: http://www.tokutek.com/products/tokumx-for-mongodb
 Group: Applications/Databases
-BuildRoot: %{buildroot}
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: %{name}-%{version}.tar.gz
 Source1: %{product_name}.init
@@ -31,7 +31,13 @@ Source6: %{product_name}.service
 
 %if 0%{?fedora} >= 15
 BuildRequires: boost-devel
+BuildRequires: cmake
+%else
+BuildRequires: cmake28
 %endif
+BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: make
 BuildRequires: readline-devel
 BuildRequires: libpcap-devel
 %if 0%{?fedora} >= 15

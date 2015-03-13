@@ -274,20 +274,12 @@ namespace mongo {
         // - Geo indexes
         // In the future:
         // - FTS indexes?
-
-
-/*CONFLICT        static shared_ptr<IndexDetailsBase> make(const BSONObj &info,
-                                                 const bool may_create,
-                                                 const bool use_memcmp_magic);*/
-
-/*CONFLICT        static shared_ptr<IndexInterface> make(const BSONObj &info, const bool may_create = true);*/
-
         static shared_ptr<IndexInterface> make(const BSONObj &info,
                                                const bool may_create,
                                                const bool use_memcmp_magic);
 
-
         IndexInterface(const BSONObj& info);
+
 
         virtual ~IndexInterface();
 
@@ -389,9 +381,6 @@ namespace mongo {
         // Must be called after constructor. Opens the ydb dictionary
         // using _descriptor, which is set by subclass constructors.
         //
-
-        // Only IndexDetailsBase::make() calls the constructor / open.
-        //CONFLICT       bool open(const bool may_create, const bool use_memcmp_magic);
 
         // Only IndexInterface::make() calls the constructor / open.
         bool open(const bool may_create, const bool use_memcmp_magic);
