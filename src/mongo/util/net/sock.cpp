@@ -683,7 +683,12 @@ namespace mongo {
             return SSL_read( _ssl , buf , max );
         }
 #endif
-        return ::recv( _fd , buf , max , portRecvFlags );
+        int ret = ::recv( _fd , buf , max , portRecvFlags );
+        if( ret <= 0){
+            _handleRecvError(ret,max,NULL);
+            return 0;
+        }
+        return ret;
     }
 
     void Socket::_handleSendError(int ret, const char* context) {
@@ -736,7 +741,10 @@ namespace mongo {
         int e = errno;
 # if defined(EINTR)
         if (e == EINTR) {
-            LOG(_logLevel) << "EINTR retry " << ++*retries << endl;
+            if(retries != NULL)
+              LOG(_logLevel) << "EINTR retry " << ++*retries << endl;
+            else
+              LOG(_logLevel) << "EINTR returned from recv()"<<endl;
             return;
         }
 # endif
@@ -756,6 +764,7 @@ namespace mongo {
         LOG(_logLevel) << "Socket recv() " << 
             errnoWithDescription(e) << " " << remoteString() <<endl;
         throw SocketException(SocketException::RECV_ERROR , remoteString());
+        
     }
 
     void Socket::setTimeout( double secs ) {
